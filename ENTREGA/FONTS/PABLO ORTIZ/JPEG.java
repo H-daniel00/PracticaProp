@@ -1,14 +1,11 @@
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 class JPEG {
         private InputStream input;
-        private FileOutputStream output;
+        private OutputStream output;
 
         //Matriz para cálculo de DCT y DCT Inversa
         private final static double[][] dctMat = {  {0.3536,   0.3536,   0.3536,   0.3536,   0.3536,   0.3536,   0.3536,   0.3536},
