@@ -1,0 +1,76 @@
+-----
+
+Prova 1
+Descripció: Compressió correcta d'un arxiu PPM
+Objectius: Comprimir un arxiu ppm
+Drivers: JpegDriver.jar
+Entrada: 
+marroc.ppm
+c
+Sortida: 
+Comprimir / Descomprimir? (c/d)
+Arxiu comprimit a: sortida.jpg
+
+Resultat de la prova: ok
+
+-----
+
+Prova 2
+Descripció: Descompressió correcta d'un arxiu JPEG
+Objectius: Descomprimir un fitxer JPEG
+Drivers: JpegDriver.jar
+Entrada: 
+foto.jpg
+d
+Sortida:
+Comprimir / Descomprimir? (c/d)
+Arxiu descomprimit a: sortida.ppm
+Resultat de la prova: ok
+
+----
+
+Prova 3
+Descripció: Intent de comprimir un arxiu PPM invàlid
+Objectius: Comprovar la validesa dels arxius PPM
+Drivers: JpegDriver.jar
+Entrada: 
+jpg.ppm
+c
+Sortida:
+Comprimir / Descomprimir? (c/d)
+Header PPM incorrecte
+Resultat de la prova: ok
+
+----
+
+Prova 4
+Descripció: Intent de comprimir un arxiu JPEG invàlid
+Objectius: Comprovar la validesa dels arxius JPEG
+Drivers: JpegDriver.jar
+Entrada: 
+ppm.jpg
+d
+Sortida:
+Comprimir / Descomprimir? (c/d)
+Header JPEG incorrecte
+Resultat de la prova: ok
+
+----
+
+Prova 5
+Descripció: Arxiu no existent
+Objectius: Comprovar la detecció d'arxius no existens
+Drivers: JpegDriver.jar
+Entrada: 
+no_existeix.jpg
+d
+Sortida:
+Comprimir / Descomprimir? (c/d)
+No existeix el fitxer
+Resultat de la prova: ok
+
+----
+
+
+
+
