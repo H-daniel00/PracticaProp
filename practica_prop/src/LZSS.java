@@ -1,5 +1,4 @@
 
-
 import java.io.*;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -9,23 +8,46 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.io.FileOutputStream;
 
-public class LZSS {
+public class LZSS extends Algoritme {
 
-    private FileInputStream input = null;
-    private FileOutputStream output = null;
+    DataInputStream in;
+    DataOutputStream out;
+    InputStream input;
+    String text_in = "";
 
 
-    private String texto = "";
+    private String descomprimido = "";
     private int cantidad = 1;
     private int nums = 0;
     private byte temporal = 0;
     private int contadormax = 0;
 
+    public LZW(InputStream input, OutputStream output, String funcio) {
+        super(input, output);
+        if (funcio.equals("comprimir")) {
+            this.input = input;
+        } else {
+            this.in = new DataInputStream(new BufferedInputStream(input));
+        }
+
+        this.out = new DataOutputStream(output);
+    }
+
+    public void llegir_input() throws UnsupportedEncodingException, IOException {
+        String cadena;
+        BufferedReader i;
+        for (i = new BufferedReader(new InputStreamReader(this.input, "utf-8")); (cadena = i.readLine()) != null; this.text_in = this.text_in + "\r\n") {
+            this.text_in = this.text_in + cadena;
+        }
+
+        i.close();
+    }
+
     private void comproba() throws IOException {
         ++cantidad;
         if (cantidad == 9) {
             cantidad = 1;
-            output.write(temporal);
+            out.writeByte(temporal);
             temporal = 0;
         }
     }
@@ -43,10 +65,9 @@ public class LZSS {
         Stack retorna = new Stack();
         if (numdec == 0) {
             nums = 0;
-        }
-        else {
+        } else {
             while (numdec > 1) {
-                retorna.push(numdec%2);
+                retorna.push(numdec % 2);
                 numdec /= 2;
                 ++nums;
             }
@@ -62,9 +83,9 @@ public class LZSS {
         }
         int sumael2;
         while (nums > 0) {
-            if (1 == (int)numsbin.peek()) {
-                sumael2 = (int)Math.pow(2, (8-cantidad));
-                temporal = (byte) (temporal |sumael2);
+            if (1 == (int) numsbin.peek()) {
+                sumael2 = (int) Math.pow(2, (8 - cantidad));
+                temporal = (byte) (temporal | sumael2);
             }
             comproba();
             numsbin.pop();
@@ -75,17 +96,17 @@ public class LZSS {
     private int trobaiguals(int i, int j) throws IOException {
         int contador = 0;
         int r = -1;
-        if (texto.charAt(j) == texto.charAt(i)) {
+        if (text_in.charAt(j) == text_in.charAt(i)) {
             contador = 1;
             int m = j + 1;
             int n = i + 1;
-            while (contador < 34 && n < texto.length() && texto.charAt(n) == texto.charAt(m)) {
+            while (contador < 34 && n < text_in.length() && text_in.charAt(n) == text_in.charAt(m)) {
                 ++contador;
                 ++n;
                 ++m;
             }
             if (contador > contadormax) {
-                r= j;
+                r = j;
                 contadormax = contador;
             }
             if (contadormax == 35) j = 0;
@@ -94,48 +115,44 @@ public class LZSS {
     }
 
     public void comprimir() throws IOException {
+        llegir_input();
         char temp;
         int r;
-        while (input.available() > 0) {
-            texto += (char)input.read();
-        }
-        for (int i = 0; i < texto.length(); ++i) {
+        for (int i = 0; i < text_in.length(); ++i) {
             contadormax = 0;
             nums = 0;
-            r  = 0;
+            r = 0;
             if (i > 0) {
                 if (i <= 8195) {
                     for (int j = i - 1; j >= 0; --j) {
                         int lol = trobaiguals(i, j);
                         if (lol != -1) r = lol;
                     }
-                }
-                else {
-                    for (int j = i - 1; j >= i-8196; --j) {
+                } else {
+                    for (int j = i - 1; j >= i - 8196; --j) {
                         int lol = trobaiguals(i, j);
                         if (lol != -1) r = lol;
                     }
                 }
             }
             if (contadormax >= 3) {
-                int sumael1 = (int)Math.pow(2, (8-cantidad));
+                int sumael1 = (int) Math.pow(2, (8 - cantidad));
                 temporal = (byte) (temporal | sumael1);
                 comproba();
                 Stack numsbin;
-                numsbin = donanumbin(i-r);
+                numsbin = donanumbin(i - r);
                 ficalallista(numsbin, 13);
                 numsbin = donanumbin(contadormax - 3);
-                ficalallista(numsbin,  5);
+                ficalallista(numsbin, 5);
                 i += contadormax - 1;
-            }
-            else {
-                temp = texto.charAt(i);
+            } else {
+                temp = text_in.charAt(i);
                 comproba();
                 Stack numsbin = donanumbin(temp);
                 ficalallista(numsbin, 8);
             }
         }
-        if (cantidad != 1) output.write(temporal);
+        if (cantidad != 1) out.writeByte(temporal);
 
     }
 
@@ -146,52 +163,54 @@ public class LZSS {
         short tam = 0;
         byte util = 1;
         int j = 0;
-        int puntero= 0;
-        int contador= 0;
-        ByteArrayOutputStream comp = new ByteArrayOutputStream();
-        while ( (j= input.read()) != -1) {
-            comp.write(((byte)j));
+        int puntero = 0;
+        int contador = 0;
+        int afegir = 0;
+        byte[] comprimido = new byte[in.available()];
+        int x = 0;
+        while (in.available() > 0) {
+            if (in.available() == 1) afegir = in.read();
+            else afegir = in.readShort();//esto no se que hace
+            comprimido[x] = (byte) afegir;
+            ++x;
         }
-        byte[] comprimido = comp.toByteArray();
+        in.close();
 
-        while (puntero < comprimido.length -1) {
-            flag = (byte) (((comprimido[puntero] & 0xFF)>> (8 -cantidad)) & util);
+        while (puntero < comprimido.length - 1) {
+            flag = (byte) (((comprimido[puntero] & 0xFF) >> (8 - cantidad)) & util);
             puntero = comproba2(puntero);
             int numeros = 0;
-            if (flag == 0 && (puntero < (comprimido.length -1))) {
+            if (flag == 0 && (puntero < (comprimido.length - 1))) {
                 numeros = 8;
                 letra = 0;
                 if (cantidad == 1) {
                     letra = (byte) (comprimido[puntero] & 0xFF);
                     ++puntero;
-                }
-                else {
+                } else {
                     byte tem;
                     while (numeros > 0) {
-                        tem = (byte) ((((byte) (comprimido[puntero] & 0xFF)) >> (8-cantidad)) & util);
-                        tem = (byte) (tem << (numeros-1));
-                        letra = (byte) (tem |letra);
+                        tem = (byte) ((((byte) (comprimido[puntero] & 0xFF)) >> (8 - cantidad)) & util);
+                        tem = (byte) (tem << (numeros - 1));
+                        letra = (byte) (tem | letra);
                         puntero = comproba2(puntero);
                         --numeros;
                     }
                 }
-                texto += (char)letra;
+                descomprimido += (char) letra;
                 ++contador;
-            }
-            else {
+            } else {
                 numeros = 18;
                 distancia = 0;
                 tam = 0;
                 short tem = 0;
                 while (numeros > 0) {
                     if (numeros == 5) tem = 0;
-                    tem = (byte) ((((byte) (comprimido[puntero] & 0xFF)) >> (8-cantidad)) & util);
+                    tem = (byte) ((((byte) (comprimido[puntero] & 0xFF)) >> (8 - cantidad)) & util);
                     if (numeros > 5) {
-                        tem = (short) (tem << (numeros-6));
+                        tem = (short) (tem << (numeros - 6));
                         distancia = (short) (tem | distancia);
-                    }
-                    else {
-                        tem = (byte) (tem << (numeros-1));
+                    } else {
+                        tem = (byte) (tem << (numeros - 1));
                         tam = (byte) (tem | tam);
                     }
                     puntero = comproba2(puntero);
@@ -199,18 +218,14 @@ public class LZSS {
                 }
                 int por = contador - distancia;
                 for (int k = 0; k < tam + 3; ++k) {
-                    texto += texto.charAt(por);
+                    descomprimido += descomprimido.charAt(por);
                     ++por;
                     ++contador;
                 }
             }
         }
-        byte[] ceb = texto.getBytes();
-        output.write(ceb);
-    }
-
-    public LZSS(FileInputStream input, FileOutputStream output) {
-        this.input =  input;
-        this.output = output;
+        byte[] ceb = descomprimido.getBytes();
+        this.out.write(ceb);
     }
 }
+
