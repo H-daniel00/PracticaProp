@@ -125,7 +125,7 @@ class JPEG extends Algoritme{
 
         private void read_jpeg(boolean header) throws IOException{
             InputStream input = this.input;
-            if(header) input = new FileInputStream("header.jpg");
+            if(header) input = JPEG.class.getResourceAsStream("header.jpg");
             int i;
             boolean scan = false;
             if(input.read() != 0xFF & input.read() != 0xD8){
