@@ -86,9 +86,8 @@ public class CtrlCarpeta{
                     tempOut.write(input.read());
                 }
                 ByteArrayInputStream fileIn = new ByteArrayInputStream(tempOut.toByteArray());
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                ByteArrayOutputStream out = ctrlFitxer.descomprimir(fileIn,type);
                 ctrlFitxer.escriureFitxerSortida(out,path_out+"/"+path);
-                out = ctrlFitxer.descomprimir(fileIn,type);
             }if(type == 4){
                 File folder = new File(path_out+"/"+path);
                 folder.mkdir();
@@ -129,9 +128,8 @@ public class CtrlCarpeta{
             } else {
                 type = 0; //Get algorithm
                 System.out.println(relPath);
-                FileInputStream input = new FileInputStream(absPath);
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                fakeCompress(input,out);
+                FileInputStream input = ctrlFitxer.carregarFitxerEntrada(absPath);
+                ByteArrayOutputStream out = ctrlFitxer.comprimir(input,type);
                 byte[] compressedFile = out.toByteArray();
                 writeFile(relPath,type,compressedFile,output);
             }

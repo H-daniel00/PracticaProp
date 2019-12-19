@@ -33,9 +33,8 @@ public class CtrlFitxer {
     }
 
     
-    public InputStream carregarFitxerEntrada(String path_entrada) throws IOException{
-        InputStream input = null;
-        input = new FileInputStream(path_entrada);
+    public FileInputStream carregarFitxerEntrada(String path_entrada) throws IOException{
+        FileInputStream input = new FileInputStream(path_entrada);
         return input;
     }
     
