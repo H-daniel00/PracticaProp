@@ -86,9 +86,9 @@ public class CtrlCarpeta{
                     tempOut.write(input.read());
                 }
                 ByteArrayInputStream fileIn = new ByteArrayInputStream(tempOut.toByteArray());
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                ctrlFitxer.escriureFitxerSortida(out,path_out+"/"+path);
-                out = ctrlFitxer.descomprimir(fileIn,type);
+
+                FileOutputStream fileOut = new FileOutputStream(path_out+"/"+path);
+                fakeCompress(fileIn,fileOut);
             }if(type == 4){
                 File folder = new File(path_out+"/"+path);
                 folder.mkdir();
@@ -101,10 +101,9 @@ public class CtrlCarpeta{
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         if(!path.endsWith("/") && !path.endsWith("\\")) path = path +"/";
         final File folder = new File(path);
-        String relPath = folder.getName() + "/";
-        String absPath = folder.getAbsolutePath() + "/";
-        writeHeader(relPath,(byte)4,output);
-        listFilesForFolder(relPath,absPath,folder,output);
+        String name = folder.getName();
+        writeHeader(name,(byte)4,output);
+        listFilesForFolder(folder.getName(),folder.getAbsolutePath(),folder,output);
         return output;
     }
 

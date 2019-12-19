@@ -81,7 +81,7 @@ public class CtrlDomini {
         else if(Path_entrada.endsWith(".ppm")) this.Path_sortida = "sortida.jpg";
         else if( Path_entrada.endsWith(".lz78") || Path_entrada.endsWith(".lzss") || Path_entrada.endsWith(".lzw")) this.Path_sortida = "sortida.txt";
         else if ( Path_entrada.endsWith(".jpg")) this.Path_sortida = "sortida.ppm";
-        else if ( Path_entrada.endsWith(".tar")) this.Path_sortida = "carpeta";
+        else if ( Path_entrada.endsWith(".tar")) this.Path_sortida = "./carpeta";
         else if (new File(Path_entrada).isDirectory()) Path_sortida = "carpeta.tar";
     }
     

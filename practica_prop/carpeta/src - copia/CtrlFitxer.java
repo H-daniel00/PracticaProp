@@ -21,11 +21,11 @@ public class CtrlFitxer {
     }
 
 
-    public OutputStream comprimir(InputStream input, int algoritme) throws IOException {
-        return domini.comprimir(input,algoritme);
+    public void comprimir(InputStream input, int algoritme) throws IOException {
+        domini.comprimir(input,algoritme);
     }
-    public OutputStream descomprimir(InputStream input, int algoritme) throws IOException {
-        return domini.descomprimir(input,algoritme);
+    public void descomprimir(InputStream input, int algoritme) throws IOException {
+        domini.descomprimir(input,algoritme);
     }
 
     public int algoritmeAutomatic(String path){
