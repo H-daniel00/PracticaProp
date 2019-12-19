@@ -3,6 +3,7 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -46,22 +47,15 @@ public class CtrlCarpeta{
 
     void decompress(InputStream input,String path_out) throws IOException{
         int temp;
-        path_out = path_out.replace("\\","/");
-        String[] separatedPath = path_out.split("/");
-        StringBuilder auxPath = new StringBuilder();
-        for(int i = 0; i<separatedPath.length-1; i++){
-            auxPath.append(separatedPath[i]);
-            if(i != separatedPath.length-2){
-                auxPath.append("/");
-            }
-        }
-        String auxPathResult = auxPath.toString();
-        File auxFolder = new File(path_out);
-        if(!auxFolder.exists()){
-            File rootFolder = new File(auxPathResult);
+        Path target = Paths.get(path_out).toAbsolutePath();
+        Path parent = target.getParent();
+        File targetFile = new File(target.toString());
+        if(!targetFile.exists()){
+            File rootFolder = new File(parent.toString());
             if(!rootFolder.exists() || !rootFolder.isDirectory()) throw new IOException("Can't find output path");
-            if(!auxFolder.mkdir()) throw new IOException("Can't create output folder");
+            if(!targetFile.mkdir()) throw new IOException("Can't create output folder");
         }
+
         while((temp = input.read()) != -1) {
             String path = "";
             for (int i = 0; i < 100; i++) {
@@ -73,7 +67,10 @@ public class CtrlCarpeta{
             System.out.println(path);
             int type = input.read();
             System.out.println(type);
-            if(type == 0) {
+            if(type == 4){
+                File folder = new File(path_out+"/"+path);
+                folder.mkdir();
+            }else{
                 byte[] size = new byte[4];
                 int fileSize = 0;
                 for (int b = 0; b < 4; b++) {
@@ -86,11 +83,13 @@ public class CtrlCarpeta{
                     tempOut.write(input.read());
                 }
                 ByteArrayInputStream fileIn = new ByteArrayInputStream(tempOut.toByteArray());
-                ByteArrayOutputStream out = ctrlFitxer.descomprimir(fileIn,type);
+                ByteArrayOutputStream out;
+                if(type == 5) {
+                    out = justCopy(fileIn);
+                }else{
+                    out = ctrlFitxer.descomprimir(fileIn,type);
+                }
                 ctrlFitxer.escriureFitxerSortida(out,path_out+"/"+path);
-            }if(type == 4){
-                File folder = new File(path_out+"/"+path);
-                folder.mkdir();
             }
         }
     }
@@ -126,10 +125,16 @@ public class CtrlCarpeta{
 
                 System.out.println(relPath);
             } else {
-                type = 0; //Get algorithm
+                type =(byte) ctrlFitxer.algoritmeAutomatic(fileEntry.getName(),0);
+
                 System.out.println(relPath);
                 FileInputStream input = ctrlFitxer.carregarFitxerEntrada(absPath);
-                ByteArrayOutputStream out = ctrlFitxer.comprimir(input,type);
+                ByteArrayOutputStream out;
+                if(type == 5){
+                    out = justCopy(input);
+                }else {
+                    out = ctrlFitxer.comprimir(input, type);
+                }
                 byte[] compressedFile = out.toByteArray();
                 writeFile(relPath,type,compressedFile,output);
             }
@@ -161,10 +166,12 @@ public class CtrlCarpeta{
         }
     }
 
-    void fakeCompress(InputStream in, OutputStream out) throws IOException{
+    ByteArrayOutputStream justCopy(InputStream in) throws IOException{
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
         int temp;
         while((temp = in.read()) != -1){
             out.write(temp);
         }
+        return out;
     }
 }

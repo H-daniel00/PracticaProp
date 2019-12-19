@@ -15,6 +15,7 @@ import java.util.*;
 public class CtrlDomini {
     
     //entrada
+    private int Funcio;
     private String Path_entrada;
     private int Algoritme;
     private String Path_sortida;
@@ -26,8 +27,9 @@ public class CtrlDomini {
     
     
     public CtrlDomini(int funcio, String path_entrada, int algoritme) throws IOException {
-        inicializarCtrlDomini(path_entrada,algoritme);
+        inicializarCtrlDomini(path_entrada,algoritme,funcio);
         ByteArrayOutputStream output;
+        System.out.println(Algoritme);
         if(Algoritme == 4){
             if(funcio == 0){
                 output = comprimir(Path_entrada);
@@ -47,29 +49,41 @@ public class CtrlDomini {
         }
     }
 
-    public void inicializarCtrlDomini(String path_entrada, int algoritme) {
+    public void inicializarCtrlDomini(String path_entrada, int algoritme,int funcio) throws IOException {
 
         ControladorFitxer = new CtrlFitxer(this);
+        setFuncio(funcio);
         setPath_entrada(path_entrada);
         setAlgoritme(algoritme);
         setPath_sortida();
         
     }
 
-    public int algoritme_automatic(String path){
-        if(path.endsWith(".txt") || path.endsWith(".lzw")) return 1;
-        else if(path.endsWith(".ppm") || path.endsWith(".jpg") || path.endsWith(".jpeg")) return 3;
-        if(path.endsWith(".lz78")) return 0;
-        if(path.endsWith(".lzss")) return 2;
-        else return 4;
+    public int algoritme_automatic(String path, int funcio){
+        if(funcio == 0){
+            if(path.endsWith(".txt")) return 1;
+            else if(path.endsWith(".ppm")) return 3;
+            else if(new File(path).isDirectory()) return 4;
+            else return 5;
+        }else{
+            if(path.endsWith(".lz78")) return 0;
+            else if(path.endsWith(".lzw")) return 1;
+            else if(path.endsWith(".lzss")) return 2;
+            else if(path.endsWith(".jpg") || path.endsWith(".jpeg")) return 3;
+            else if(path.endsWith(".tar")) return 4;
+            else return 5;
+        }
     }
-
+    public void setFuncio(int funcio){
+        Funcio = funcio;
+    }
     public void setPath_entrada(String path_entrada) {
         this.Path_entrada = path_entrada;
     }
-    public void setAlgoritme(int algoritme) {
-        if(algoritme == 5) this.Algoritme = algoritme_automatic(Path_entrada);
+    public void setAlgoritme(int algoritme) throws IOException {
+        if(algoritme == 5) Algoritme = algoritme_automatic(Path_entrada,Funcio);
         else this.Algoritme = algoritme;
+        if(Algoritme == 5) throw new IOException("No existeix algorisme per aquesta entrada.");
     } 
     public void setPath_sortida(){
         

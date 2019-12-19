@@ -28,8 +28,8 @@ public class CtrlFitxer {
         return domini.descomprimir(input,algoritme);
     }
 
-    public int algoritmeAutomatic(String path){
-        return domini.algoritme_automatic(path);
+    public int algoritmeAutomatic(String path,int funcio){
+        return domini.algoritme_automatic(path,funcio);
     }
 
     
