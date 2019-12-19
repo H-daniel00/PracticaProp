@@ -15,8 +15,8 @@ public class LZW extends Algoritme{
     private int MAX_SIZE = 65536;
 
 
-    public LZW(InputStream input , OutputStream output, int funcio) {
-        super(input,output);
+    public LZW(InputStream input , int funcio) {
+        super(input);
         if(funcio == 0) this.input = input;
         else this.in =  new DataInputStream( new BufferedInputStream(input));
         this.out = new DataOutputStream(output);
@@ -33,7 +33,7 @@ public class LZW extends Algoritme{
          
     }
         
-    public void comprimir() throws IOException {
+    public ByteArrayOutputStream comprimir() throws IOException {
         llegir_input();
         Map<String, Short> diccionari = new HashMap<>();
         inicialitzar_diccionari(diccionari);
@@ -58,7 +58,7 @@ public class LZW extends Algoritme{
         if(!s.equals("")) {
             out.writeShort(diccionari.get(s));
         }
-        
+        return output;
 
     }
     private static void inicialitzar_diccionari(Map<String, Short> diccionari) {
@@ -67,7 +67,7 @@ public class LZW extends Algoritme{
         }
     }
 
-    public  void descomprimir() throws IOException{
+    public  ByteArrayOutputStream descomprimir() throws IOException{
 
 
         List<Integer> text_in = new ArrayList<Integer>();
@@ -103,6 +103,7 @@ public class LZW extends Algoritme{
         byte[] o = textOut.toString().getBytes();
         out.write(o);
         System.out.println("mida diccionari:" + mida_diccionari);
+        return output;
     }
 
     private static void inicialitzar_diccionari_descomprimir(Map<Integer, String> diccionari) {

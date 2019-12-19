@@ -22,10 +22,10 @@ public class CtrlFitxer {
 
 
     public void comprimir(InputStream input, OutputStream output, int algoritme) throws IOException {
-        domini.comprimir(input,output,algoritme);
+        domini.comprimir(input,algoritme);
     }
     public void descomprimir(InputStream input, OutputStream output, int algoritme) throws IOException {
-        domini.descomprimir(input,output,algoritme);
+        domini.descomprimir(input,algoritme);
     }
 
     public int algoritmeAutomatic(String path){
@@ -39,9 +39,11 @@ public class CtrlFitxer {
         return input;
     }
     
-    public FileOutputStream carregarFitxerSortida(String path_sortida) throws IOException{
-        FileOutputStream output = null;
-        output = new FileOutputStream(path_sortida);
-        return output;
+    public void escriureFitxerSortida(ByteArrayOutputStream stream,String path_sortida) throws IOException{
+        byte[] data = stream.toByteArray();
+        FileOutputStream output = new FileOutputStream(path_sortida);
+        for(byte b: data){
+            output.write(b);
+        }
     }
 }

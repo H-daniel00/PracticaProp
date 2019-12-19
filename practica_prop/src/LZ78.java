@@ -17,8 +17,8 @@ public class LZ78 extends Algoritme{
     long endTime;
     int tamO;
 
-    public LZ78(InputStream input , OutputStream output, int funcio) {
-        super(input,output);
+    public LZ78(InputStream input, int funcio) {
+        super(input);
         if(funcio == 0) this.input = input;
         else this.in =  new DataInputStream( new BufferedInputStream(input));
         this.out = new DataOutputStream(output);
@@ -39,7 +39,7 @@ public class LZ78 extends Algoritme{
     }
 
 
-    public void comprimir() throws IOException {
+    public ByteArrayOutputStream comprimir() throws IOException {
         startTime = System.nanoTime();
         llegir_input();
         Map<String, Short> diccionari = new HashMap<>();
@@ -85,6 +85,7 @@ public class LZ78 extends Algoritme{
         }
 
         endTime = System.nanoTime();
+        return output;
     }
 
     public int get_mida_original() throws IOException {
@@ -100,7 +101,7 @@ public class LZ78 extends Algoritme{
 
 
 
-    public void descomprimir() throws IOException {
+    public ByteArrayOutputStream descomprimir() throws IOException {
 
         List<Integer> text_in = new ArrayList<>();
         //poso el text codificat a una llista d'enters
@@ -161,6 +162,7 @@ public class LZ78 extends Algoritme{
         //System.out.println("textout:" + text_out);
         byte[] o = text_out.toString().getBytes();
         out.write(o);
+        return output;
     }
 
 

@@ -13,13 +13,13 @@ import java.util.*;
  */
 abstract class Algoritme {
     InputStream input;
-    OutputStream output;
+    ByteArrayOutputStream output;
     
-    public Algoritme(InputStream input, OutputStream output){
+    public Algoritme(InputStream input){
         this.input = input;
-        this.output = output;
+        this.output = new ByteArrayOutputStream();
     }
     
-    abstract void comprimir() throws IOException;
-    abstract void descomprimir() throws IOException;
+    abstract ByteArrayOutputStream comprimir() throws IOException;
+    abstract ByteArrayOutputStream descomprimir() throws IOException;
 }

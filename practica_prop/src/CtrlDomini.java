@@ -15,7 +15,6 @@ import java.util.*;
 public class CtrlDomini {
     
     //entrada
-    private int Funcio;
     private String Path_entrada;
     private int Algoritme;
     private String Path_sortida;
@@ -24,22 +23,25 @@ public class CtrlDomini {
     
     
     private InputStream input;
-    private OutputStream output;
     
     
     public CtrlDomini(int funcio, String path_entrada, int algoritme) throws IOException {
-        inicializarCtrlDomini(funcio,path_entrada,algoritme);
+        inicializarCtrlDomini(path_entrada,algoritme);
         carregarFitxerEntrada();
-        carregarFitxerSortida();
-        if(funcio == 0) comprimir(input,output,Algoritme);
-        else descomprimir(input,output,Algoritme);
+        ByteArrayOutputStream output;
+        if(funcio == 0) {
+            output = comprimir(input,Algoritme);
+        }else{
+            output = descomprimir(input,Algoritme);
+        }
+
+        escriureFitxerSortida(output);
         
     }
-    
-    public void inicializarCtrlDomini( int funcio, String path_entrada, int algoritme) {
+
+    public void inicializarCtrlDomini(String path_entrada, int algoritme) {
 
         ControladorFitxer = new CtrlFitxer(this);
-        setFuncio(funcio);
         setPath_entrada(path_entrada);
         setAlgoritme(algoritme);
         setPath_sortida();
@@ -52,11 +54,6 @@ public class CtrlDomini {
         if(path.endsWith(".lz78")) return 0;
         if(path.endsWith(".lzss")) return 2;
         else return 4;
-    }
-
-
-    public void setFuncio(int Funcio) {
-        this.Funcio = Funcio;
     }
 
     public void setPath_entrada(String path_entrada) {
@@ -81,52 +78,52 @@ public class CtrlDomini {
     public void carregarFitxerEntrada() throws IOException{
         this.input  = ControladorFitxer.carregarFitxerEntrada(Path_entrada);
     }
-    public void carregarFitxerSortida() throws IOException{
-        this.output = ControladorFitxer.carregarFitxerSortida(Path_sortida);
+    public void escriureFitxerSortida(ByteArrayOutputStream stream) throws IOException{
+        ControladorFitxer.escriureFitxerSortida(stream,Path_sortida);
     }
     
-    public void comprimir(InputStream input, OutputStream output, int algoritme) throws IOException{
+    public ByteArrayOutputStream comprimir(InputStream input, int algoritme) throws IOException{
         Algoritme arxiu;
-        switch (algoritme){
+        switch (algoritme) {
             case 0:
-                arxiu = new LZ78(input,output,0);
+                arxiu = new LZ78(input, 0);
                 break;
             case 1:
-                arxiu = new LZW(input,output,0);
+                arxiu = new LZW(input, 0);
                 break;
             case 2:
-                arxiu = new LZSS(input,output,0);
+                arxiu = new LZSS(input, 0);
                 break;
             case 3:
-                arxiu = new JPEG(input,output);
+                arxiu = new JPEG(input);
                 break;
 
             default:
                 throw new IllegalStateException("Unexpected value: " + algoritme);
         }
-        arxiu.comprimir();
+        return arxiu.comprimir();
     }
 
-    public void descomprimir(InputStream input, OutputStream output, int algoritme) throws IOException{
+    public ByteArrayOutputStream descomprimir(InputStream input, int algoritme) throws IOException{
         Algoritme arxiu;
         switch (algoritme){
             case 0:
-                arxiu = new LZ78(input,output,1);
+                arxiu = new LZ78(input,1);
                 break;
             case 1:
-                arxiu = new LZW(input,output,1);
+                arxiu = new LZW(input,1);
                 break;
             case 2:
-                arxiu = new LZSS(input,output,1);
+                arxiu = new LZSS(input,1);
                 break;
             case 3:
-                arxiu = new JPEG(input,output);
+                arxiu = new JPEG(input);
                 break;
 
             default:
                 throw new IllegalStateException("Unexpected value: " + algoritme);
         }
-        arxiu.descomprimir();
+        return arxiu.descomprimir();
     }
 
 }

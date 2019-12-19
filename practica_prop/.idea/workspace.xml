@@ -109,10 +109,22 @@
       <workItem from="1576583842404" duration="1776000" />
       <workItem from="1576585655413" duration="1694000" />
     </task>
+    <task id="LOCAL-00001" summary="Consistency of domain">
+      <created>1576790164214</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1576790164214</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Consistency of domain" />
+    <option name="LAST_COMMIT_MESSAGE" value="Consistency of domain" />
   </component>
   <component name="WindowStateProjectService">
     <state x="724" y="368" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1576788259322">
@@ -120,9 +132,10 @@
     </state>
     <state x="724" y="368" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576788259322" />
     <state x="559" y="289" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/70.27.1296.741@70.27.1296.741" timestamp="1576587949592" />
-    <state x="545" y="150" width="890" height="814" key="CommitChangelistDialog2" timestamp="1576619669244">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state x="493" y="121" width="890" height="814" key="CommitChangelistDialog2" timestamp="1576790158345">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="493" y="121" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576790158345" />
     <state x="545" y="150" width="890" height="814" key="CommitChangelistDialog2/70.27.1850.1053@70.27.1850.1053" timestamp="1576619669244" />
     <state x="735" y="280" width="424" height="491" key="FileChooserDialogImpl" timestamp="1576789933943">
       <screen x="0" y="0" width="1920" height="1040" />

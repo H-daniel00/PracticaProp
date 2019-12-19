@@ -1,4 +1,3 @@
-package com.company;
 
 import javax.xml.crypto.Data;
 import java.io.DataInputStream;
@@ -58,7 +57,7 @@ public class Estadistiques {
     }
 
 
-    public void editar_estadistica_LZ78(LZ78 c) throws IOException {
+    /*public void editar_estadistica_LZ78(LZ78 c) throws IOException {
 
         this.nd1 = in_lz78.readInt();
         System.out.println("------------------he llegit el enter "+nd1);

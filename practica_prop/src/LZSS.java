@@ -22,8 +22,8 @@ public class LZSS extends Algoritme {
     private byte temporal = 0;
     private int contadormax = 0;
 
-    public LZSS(InputStream input, OutputStream output, int funcio) {
-        super(input, output);
+    public LZSS(InputStream input, int funcio) {
+        super(input);
         if (funcio == 0) this.input = input;
         else this.in = new DataInputStream(new BufferedInputStream(input));
         this.out = new DataOutputStream(output);
@@ -109,7 +109,7 @@ public class LZSS extends Algoritme {
         return r;
     }
 
-    public void comprimir() throws IOException {
+    public ByteArrayOutputStream comprimir() throws IOException {
         llegir_input();
         char temp;
         int r;
@@ -148,10 +148,10 @@ public class LZSS extends Algoritme {
             }
         }
         if (cantidad != 1) out.writeByte(temporal);
-
+        return output;
     }
 
-    public void descomprimir() throws IOException {
+    public ByteArrayOutputStream descomprimir() throws IOException {
         byte flag = 0;
         short letra = 0;
         short distancia = 0;
@@ -214,6 +214,7 @@ public class LZSS extends Algoritme {
         }
         byte[] ceb = descomprimido.getBytes();
         this.out.write(ceb);
+        return output;
     }
 }
 
