@@ -22,21 +22,29 @@ public class CtrlDomini {
     private CtrlFitxer ControladorFitxer;
     
     
-    private InputStream input;
+    private InputStream Input;
     
     
     public CtrlDomini(int funcio, String path_entrada, int algoritme) throws IOException {
         inicializarCtrlDomini(path_entrada,algoritme);
-        carregarFitxerEntrada();
         ByteArrayOutputStream output;
-        if(funcio == 0) {
-            output = comprimir(input,Algoritme);
-        }else{
-            output = descomprimir(input,Algoritme);
-        }
+        if(Algoritme == 4){
+            if(funcio == 0){
+                output = comprimir(Path_entrada);
+            }else{
+                carregarFitxerEntrada();
+                descomprimir(Input,Path_sortida);
+            }
+        }else {
+            carregarFitxerEntrada();
+            if (funcio == 0) {
+                output = comprimir(Input, Algoritme);
+            } else {
+                output = descomprimir(Input, Algoritme);
+            }
 
-        escriureFitxerSortida(output);
-        
+            escriureFitxerSortida(output);
+        }
     }
 
     public void inicializarCtrlDomini(String path_entrada, int algoritme) {
@@ -73,10 +81,11 @@ public class CtrlDomini {
         else if(Path_entrada.endsWith(".ppm")) this.Path_sortida = "sortida.jpg";
         else if( Path_entrada.endsWith(".lz78") || Path_entrada.endsWith(".lzss") || Path_entrada.endsWith(".lzw")) this.Path_sortida = "sortida.txt";
         else if ( Path_entrada.endsWith(".jpg")) this.Path_sortida = "sortida.ppm";
+        else Path_sortida = "carpeta.tar";
     }
     
     public void carregarFitxerEntrada() throws IOException{
-        this.input  = ControladorFitxer.carregarFitxerEntrada(Path_entrada);
+        Input  = ControladorFitxer.carregarFitxerEntrada(Path_entrada);
     }
     public void escriureFitxerSortida(ByteArrayOutputStream stream) throws IOException{
         ControladorFitxer.escriureFitxerSortida(stream,Path_sortida);
@@ -103,6 +112,10 @@ public class CtrlDomini {
         }
         return arxiu.comprimir();
     }
+    public ByteArrayOutputStream comprimir(String path_entrada) throws IOException{
+        CtrlCarpeta carpeta = ControladorFitxer.ControladorCarpeta;
+        return carpeta.compress(path_entrada);
+    }
 
     public ByteArrayOutputStream descomprimir(InputStream input, int algoritme) throws IOException{
         Algoritme arxiu;
@@ -124,6 +137,10 @@ public class CtrlDomini {
                 throw new IllegalStateException("Unexpected value: " + algoritme);
         }
         return arxiu.descomprimir();
+    }
+    public void descomprimir(InputStream input, String path_sortida) throws IOException{
+        CtrlCarpeta carpeta = ControladorFitxer.ControladorCarpeta;
+        carpeta.decompress(input,path_sortida);
     }
 
 }

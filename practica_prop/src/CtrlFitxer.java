@@ -13,7 +13,7 @@ import java.util.*;
 public class CtrlFitxer {
 
     CtrlDomini domini;
-    CtrlCarpeta ControladorCarpeta;
+    public CtrlCarpeta ControladorCarpeta;
 
     public CtrlFitxer(CtrlDomini ctrlDomini) {
         this.domini = ctrlDomini;

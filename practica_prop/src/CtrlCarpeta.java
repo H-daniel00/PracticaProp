@@ -37,14 +37,14 @@ public class CtrlCarpeta{
                     pathOut = sc.nextLine();
                 }while(!pathOut.endsWith(".tar"));
                 FileOutputStream output = new FileOutputStream(pathOut);
-                folderDriver.compress(path,output);
+                folderDriver.compress(path);
             }
         }catch(Exception e){
             System.out.println("Error");
         }
     }
 
-    void decompress(FileInputStream input,String path_out) throws IOException{
+    void decompress(InputStream input,String path_out) throws IOException{
         int temp;
         path_out = path_out.replace("\\","/");
         String[] separatedPath = path_out.split("/");
@@ -97,9 +97,11 @@ public class CtrlCarpeta{
     }
 
 
-    void compress(String path,FileOutputStream output) throws IOException {
+    ByteArrayOutputStream compress(String path) throws IOException {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
         final File folder = new File(path);
         listFilesForFolder("",folder,output);
+        return output;
     }
 
     void listFilesForFolder(String rel,final File folder,OutputStream output) throws IOException {
