@@ -31,6 +31,7 @@ public class CtrlDomini {
         if(Algoritme == 4){
             if(funcio == 0){
                 output = comprimir(Path_entrada);
+                escriureFitxerSortida(output);
             }else{
                 carregarFitxerEntrada();
                 descomprimir(Input,Path_sortida);
@@ -42,7 +43,6 @@ public class CtrlDomini {
             } else {
                 output = descomprimir(Input, Algoritme);
             }
-
             escriureFitxerSortida(output);
         }
     }
