@@ -88,9 +88,14 @@ public class CtrlDomini {
     public void comprimir(InputStream input, OutputStream output, int algoritme) throws IOException{
         Algoritme arxiu;
         switch (algoritme){
-            //case 0:
+            case 0:
+                arxiu = new LZ78(input,output,0);
+                break;
             case 1:
                 arxiu = new LZW(input,output,0);
+                break;
+            case 2:
+                arxiu = new LZSS(input,output,0);
                 break;
             case 3:
                 arxiu = new JPEG(input,output);
@@ -105,9 +110,14 @@ public class CtrlDomini {
     public void descomprimir(InputStream input, OutputStream output, int algoritme) throws IOException{
         Algoritme arxiu;
         switch (algoritme){
-            //case 0:
+            case 0:
+                arxiu = new LZ78(input,output,1);
+                break;
             case 1:
-                arxiu = new LZW(input,output,0);
+                arxiu = new LZW(input,output,1);
+                break;
+            case 2:
+                arxiu = new LZSS(input,output,1);
                 break;
             case 3:
                 arxiu = new JPEG(input,output);
