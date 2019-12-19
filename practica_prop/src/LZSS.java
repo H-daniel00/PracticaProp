@@ -15,8 +15,6 @@ public class LZSS extends Algoritme {
     InputStream input;
     String text_in = "";
 
-
-    private String descomprimido = "";
     private int cantidad = 1;
     private int nums = 0;
     private byte temporal = 0;
@@ -31,9 +29,12 @@ public class LZSS extends Algoritme {
 
     public void llegir_input() throws IOException {
         String cadena;
-        BufferedReader i;
-        for (i = new BufferedReader(new InputStreamReader(this.input, "utf-8")); (cadena = i.readLine()) != null; this.text_in = this.text_in + "\r\n") {
-            this.text_in = this.text_in + cadena;
+        BufferedReader i = new BufferedReader(new InputStreamReader(this.input, "utf-8"));
+        int aux = 0;
+        while ((cadena = i.readLine()) != null) {
+            if (aux != 0) text_in += "\n";
+            text_in += cadena;
+            aux++;
         }
         i.close();
     }
@@ -104,12 +105,11 @@ public class LZSS extends Algoritme {
                 r = j;
                 contadormax = contador;
             }
-            if (contadormax == 35) j = 0;
         }
         return r;
     }
 
-    public ByteArrayOutputStream comprimir() throws IOException {
+    public void comprimir() throws IOException {
         llegir_input();
         char temp;
         int r;
@@ -118,13 +118,13 @@ public class LZSS extends Algoritme {
             nums = 0;
             r = 0;
             if (i > 0) {
-                if (i <= 8195) {
+                if (i <= 8190) {
                     for (int j = i - 1; j >= 0; --j) {
                         int lol = trobaiguals(i, j);
                         if (lol != -1) r = lol;
                     }
                 } else {
-                    for (int j = i - 1; j >= i - 8196; --j) {
+                    for (int j = i - 1; j >= (i - 8190); --j) {
                         int lol = trobaiguals(i, j);
                         if (lol != -1) r = lol;
                     }
@@ -151,7 +151,8 @@ public class LZSS extends Algoritme {
         return output;
     }
 
-    public ByteArrayOutputStream descomprimir() throws IOException {
+    public void descomprimir() throws IOException {
+        String descomprimido = "";
         byte flag = 0;
         short letra = 0;
         short distancia = 0;
@@ -160,7 +161,6 @@ public class LZSS extends Algoritme {
         int puntero = 0;
         int contador = 0;
         int afegir = 0;
-        System.out.println(in.available());
         byte[] comprimido = new byte[in.available()];
         int x = 0;
         while (in.available() > 0) {
@@ -169,11 +169,11 @@ public class LZSS extends Algoritme {
             ++x;
         }
         in.close();
-        while (puntero < comprimido.length - 1) {
+        while (puntero < comprimido.length - 2) {
             flag = (byte) (((comprimido[puntero] & 0xFF) >> (8 - cantidad)) & util);
             puntero = comproba2(puntero);
             int numeros = 0;
-            if (flag == 0 && (puntero < (comprimido.length - 1))) {
+            if (flag == 0 && (puntero < (comprimido.length - 2))) {
                 numeros = 16;
                 letra = 0;
                 short tem;
@@ -186,7 +186,7 @@ public class LZSS extends Algoritme {
                 }
                 descomprimido += (char) letra;
                 ++contador;
-            } else {
+            } else if (puntero < (comprimido.length - 2)){
                 numeros = 18;
                 distancia = 0;
                 tam = 0;
