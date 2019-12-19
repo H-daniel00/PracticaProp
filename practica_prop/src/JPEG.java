@@ -54,24 +54,26 @@ class JPEG extends Algoritme{
         //Offset del componente DC
         private int[] offset = {0,0,0};
 
-        public JPEG(InputStream input, OutputStream output) {
-            super(input,output);
+        public JPEG(InputStream input) {
+            super(input);
             generate_zigzag();
         }
 
         //Metodos públicos
 
-        public void comprimir() throws IOException {
+        public ByteArrayOutputStream comprimir() throws IOException {
             read_jpeg(true);
             read_ppm_header();
             read_ppm();
             write_jpeg();
+            return output;
         }
 
-        public void descomprimir() throws IOException {
+        public ByteArrayOutputStream descomprimir() throws IOException {
             read_jpeg(false);
             read_scan();
             write_ppm();
+            return output;
         }
 
         //Funciones comunes

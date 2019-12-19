@@ -43,6 +43,10 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunManager" selected="Application.main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -111,17 +115,19 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="559" y="289" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1576587949592">
-      <screen x="70" y="27" width="1296" height="741" />
+    <state x="724" y="368" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1576788259322">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="724" y="368" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576788259322" />
     <state x="559" y="289" width="308" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/70.27.1296.741@70.27.1296.741" timestamp="1576587949592" />
     <state x="545" y="150" width="890" height="814" key="CommitChangelistDialog2" timestamp="1576619669244">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="545" y="150" width="890" height="814" key="CommitChangelistDialog2/70.27.1850.1053@70.27.1850.1053" timestamp="1576619669244" />
-    <state x="778" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1576619566594">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state x="735" y="280" width="424" height="491" key="FileChooserDialogImpl" timestamp="1576789933943">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="735" y="280" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576789933943" />
     <state x="778" y="311" width="424" height="491" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1576619566594" />
     <state width="1804" height="275" key="GridCell.Tab.0.bottom" timestamp="1576619669347">
       <screen x="70" y="27" width="1850" height="1053" />
@@ -139,6 +145,14 @@
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1804" height="275" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1576619669347" />
+    <state x="440" y="95" key="SettingsEditor" timestamp="1576789936333">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="95" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576789936333" />
+    <state x="661" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1576788172560">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="661" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576788172560" />
     <state x="486" y="317" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1576587988787">
       <screen x="70" y="27" width="1296" height="741" />
     </state>
