@@ -109,7 +109,7 @@ public class LZSS extends Algoritme {
         return r;
     }
 
-    public void comprimir() throws IOException {
+    public ByteArrayOutputStream comprimir() throws IOException {
         llegir_input();
         char temp;
         int r;
@@ -151,7 +151,7 @@ public class LZSS extends Algoritme {
         return output;
     }
 
-    public void descomprimir() throws IOException {
+    public ByteArrayOutputStream descomprimir() throws IOException {
         String descomprimido = "";
         byte flag = 0;
         short letra = 0;
