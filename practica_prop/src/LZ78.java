@@ -1,167 +1,166 @@
-
-
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class LZ78 {
+public class LZ78 extends Algoritme{
 
-    private FileInputStream input = null;
-    private FileOutputStream output = null;
 
-    int punter;
+    private DataInputStream in = null;
+    private DataOutputStream out;
+    private InputStream input;
+    private String text_in = "";
 
-    LZ78(FileInputStream input, FileOutputStream output) {
-        this.input = input;
-        this.output = output;
+    private int MAX_SIZE = 32767;
+    long startTime;
+    long endTime;
+    int tamO;
 
+    public LZ78(InputStream input , OutputStream output, int funcio) {
+        super(input,output);
+        if(funcio == 0) this.input = input;
+        else this.in =  new DataInputStream( new BufferedInputStream(input));
+        this.out = new DataOutputStream(output);
     }
 
-    private String llegir_input() throws IOException {
-        InputStreamReader isreader = new InputStreamReader(input);
-        String text_in = "";
-        int data = isreader.read();
-        while (data != -1) {
-            char ccc = (char) data;
-            text_in += ccc;
-            data = isreader.read();
+    public void llegir_input() throws UnsupportedEncodingException, IOException{
+        String cadena;
+        BufferedReader i = new BufferedReader(new InputStreamReader(input, "utf-8"));
+        int aux = 0;
+        while ((cadena = i.readLine()) != null) {
+            if (aux != 0) text_in += "\n";
+            //System.out.println("llegeixo: " + cadena);
+            text_in += cadena;
+            aux++;
         }
-        return text_in;
-    }
+        i.close();
 
-    private String longitud_fixa_index(Integer i) {
-        int integer = i;
-        String sortida ="";
-        int num_digits;
-        if(integer/10 < 1) num_digits = 1;
-        else if(integer/100 < 1) num_digits = 2;
-        else if(integer/1000 < 1) num_digits = 3;
-        else if(integer/10000 < 1) num_digits = 4;
-        else if(integer/100000 < 1) num_digits = 5;
-        else num_digits = 6;
-        if (num_digits == 1) sortida = "00000" + i;
-        else if (num_digits == 2) sortida = "0000" + i;
-        else if (num_digits == 3) sortida = "000" + i;
-        else if (num_digits == 4) sortida = "00" + i;
-        else if (num_digits == 5) sortida = "0" + i;
-        else if (num_digits == 6)sortida += i;
-        return sortida;
-    }
-
-    private String longitud_fixa_caracter(Integer i) {
-        int integer = i;
-        String sortida ="";
-        int num_digits;
-        if(integer/10 < 1) num_digits = 1;
-        else if(integer/100 < 1) num_digits = 2;
-        else num_digits = 3;
-        if (num_digits == 1) sortida = "00" + i;
-        else if (num_digits == 2) sortida = "0" + i;
-        else if (num_digits == 3)sortida += i;
-        return sortida;
-    }
-
-    private int llegir_num_index(String text_in) {
-        int sencer = 0;
-        int lec = 0;
-        for(int i = 0; i < 6; ++i){
-            char l = text_in.charAt(punter);
-            String le = Character.toString(l);
-            lec = Integer.parseInt(le);
-            lec = lec + sencer*10;
-            sencer = lec;
-            ++punter;
-        }
-        return lec;
-    }
-
-    private int llegir_num_caracter(String text_in) {
-        int sencer = 0;
-        int lec = 0;
-        for(int i = 0; i < 3; ++i){
-            char l = text_in.charAt(punter);
-            String le = Character.toString(l);
-            lec = Integer.parseInt(le);
-            lec = lec + sencer*10;
-            sencer = lec;
-            ++punter;
-        }
-        return lec;
     }
 
 
     public void comprimir() throws IOException {
-        Map<String, Integer> diccionari = new HashMap<String, Integer>();
+        startTime = System.nanoTime();
+        llegir_input();
+        Map<String, Short> diccionari = new HashMap<>();
         String s = "";
-        String aux;
-        String text_out = "";
-        char c;
         int index = 0;
-        punter = 0;
+        String saux = "";
 
-        String text = llegir_input();
-        while (punter < text.length()-1) {
-            c = text.charAt(punter);
+        //System.out.println("text_in: " + text_in);
+
+        /*int u = 65535;
+        System.out.println("passo de int a short:  "+ u+"   "+(short) u );
+         u = 65534;
+        System.out.println("passo de int a short:  "+ u+"   "+(short) u );*/
+        for (int i = 0; i < text_in.length(); ++i) {
+            char c = text_in.charAt(i);
+            saux = s;
             s += c;
             if (!diccionari.containsKey(s)) {
-                diccionari.put(s, diccionari.size()+1);
-                if (s.length() == 1) index = 0;
-
-                aux = longitud_fixa_index(index);
-                text_out += aux;
-
-                aux = longitud_fixa_caracter((int)c);
-                text_out += aux;
+                if (diccionari.size() < MAX_SIZE) {
+                    diccionari.put(s, (short) (diccionari.size()+1));
+                    if (s.length() == 1) index = 0;
+                    out.writeShort(index);
+                    out.writeShort((short) c);
+                    //System.out.println("He escrit index:  "+index+"      i caracter:  "+(short) c);
+                    System.out.println("encara no he petat");
+                }
+                else {
+                    System.out.println("el tamany del diccionari es "+diccionari.size());
+                    //s.substring(s.length()-1);
+                    System.out.println("la s   es "+s+"    saux es "+saux+" i el seu index es "+diccionari.get(saux)+"   i el char llegit es "+c);
+                    out.writeShort(diccionari.get(saux));
+                    out.writeShort((short) c);
+                    System.out.println("holi");
+                }
 
                 s = "";
             }
             else index =  diccionari.get(s);
-            punter++;
         }
         if (!s.isEmpty()) {
-            aux = longitud_fixa_index(index);
-            text_out += aux;
+            out.writeShort(index);
+            //System.out.println("He escrit index:  "+index);
         }
-        byte[] ceb = text_out.getBytes();                   //contingut en bytes
-        output.write(ceb);
+
+        endTime = System.nanoTime();
+    }
+
+    public int get_mida_original() throws IOException {
+        return tamO;
+    }
+    public int get_mida_comprimit() {
+        return out.size();
+    }
+    public double get_temps() {
+        return endTime - startTime;
     }
 
 
+
+
     public void descomprimir() throws IOException {
+
+        List<Integer> text_in = new ArrayList<>();
+        //poso el text codificat a una llista d'enters
+        int afegir = 0;
+        while(in.available() > 0){
+            if (in.available() == 1) afegir = in.read();
+            else afegir = in.readShort();
+            text_in.add(afegir);
+            //System.out.println("he afegit el:"+afegir);
+        }
+        in.close();
+        //System.out.println("------------------------------------------------------------------");
+
+        //System.out.println("text_in:   "+text_in);
+
         Map<Integer, String> diccionari = new HashMap<Integer, String>();
         String s = "";
-        String text_out = "";
         char c;
         int index = 0;
-        int id, ca;
+        int id,ca;
         Boolean ultim = false;
-        punter = 0;
 
-        String text = llegir_input();
-        while (punter < text.length()) {
-            if ((punter + 6) == text.length()) ultim = true;
-            id = llegir_num_index(text);
-            if (ultim) text_out += diccionari.get(id);
+        StringBuffer text_out = new StringBuffer(0);
+        int tam_original = text_in.size();
+        for (int i = 0; i < tam_original; i++) {
+            if (text_in.size()-1 == 0) ultim = true;
+            id = text_in.remove(0);
+            //System.out.println("Llegeixo el index: "+id);
+            if (ultim) {
+                s = diccionari.get(id);
+                text_out.append(s);
+                //System.out.println("soc ultiiiiiiiiiiim i escric "+s);
+            }
             else {
-                ca = llegir_num_caracter(text);
+                ca = text_in.remove(0);
                 c = (char) ca;
+                //System.out.println("Llegeixo el caracter: "+ca+"   que en ascii es "+c);
                 s = "";
                 index++;
                 if (id == 0) {
                     s += c;
-                    diccionari.put(index,s);
-                    text_out += s;
+                    if (diccionari.size() < MAX_SIZE) diccionari.put(index,s);
+                    text_out.append(s);
+                    //System.out.println("-----------------------------------------he escrit "+s);
                 }
                 else {
                     s += diccionari.get(id) + c;
-                    diccionari.put(index,s);
-                    text_out += s;
+                    if (diccionari.size() < MAX_SIZE) diccionari.put(index,s);
+                    text_out.append(s);
+                    //System.out.println("-----------------------------------------he escrit "+s);
                 }
+                i++;
             }
+            //System.out.println();
+
         }
-        byte[] ceb = text_out.getBytes();                   //contingut en bytes
-        output.write(ceb);
-        System.out.println(diccionari.size());
+
+        //System.out.println("textout:" + text_out);
+        byte[] o = text_out.toString().getBytes();
+        out.write(o);
     }
 
 
