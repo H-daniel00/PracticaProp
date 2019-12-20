@@ -11,19 +11,22 @@ public class VistaPrincipal extends JFrame {
     private JComboBox Funcio;
     private JComboBox Algoritme;
     private JTextArea Est;
+    private JScrollPane ESTADISTICAMOBIL;
 
 
-    double ratiCompressio;
-    double velocitat;
-    double midaO;
-    double midaC;
-    double temps;
+    private double ratiCompressio;
+    private double velocitat;
+    private double midaO;
+    private double midaC;
+    private double temps;
+
+
 
 
     private static CtrlPresentacio ControladorPresentacio;
 
     public VistaPrincipal(){
-
+        Algoritme.setSelectedIndex(5);
         VistaPrincipal v = this;
 
         Acceptar.addActionListener(new ActionListener() {
@@ -32,17 +35,23 @@ public class VistaPrincipal extends JFrame {
                 if(Fitxer.getText().isEmpty())  JOptionPane.showMessageDialog(null, "Siusplau, ompli tots els camps");
                 else {
                     try {
+                        System.out.println("abans crear");
                         ControladorPresentacio = new CtrlPresentacio(v,Funcio.getSelectedIndex(),Fitxer.getText(),Algoritme.getSelectedIndex());
+                        System.out.println("despres crear");
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
-                    String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "\n" + "- Velocitat: " + velocitat + " kBytes/s";
+                    String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "\n" + "- Velocitat: " + velocitat + " kBytes/s \n\n";
                     System.out.println("aux" + aux);
                     Est.append(aux);
+
+
                 }
 
             }
         });
+
+
 
     }
 
@@ -59,9 +68,6 @@ public class VistaPrincipal extends JFrame {
         this.midaO = midaO;
         this.midaC = midaC;
         ratiCompressio = midaC / midaO;
-
         velocitat = ((midaO / temps)*Math.pow(10,9))/Math.pow(10,3);
-
-
     }
 }

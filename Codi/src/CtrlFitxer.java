@@ -42,34 +42,6 @@ public class CtrlFitxer {
         }
     }
 
-    public ArrayList<Double> carregarFitxersEstadistica(int algoritme) throws IOException{
-        Estadistica_output = new DataOutputStream(new FileOutputStream("DadesEstadistica.txt"));
-        File  f = new File("DadesEstadistica.txt");
-        if (!f.exists()) {
-            Estadistica_output.writeDouble(0);
-        }
-        Estadistica_input = new DataInputStream(new FileInputStream("DadesEstadistica.txt"));
-        ArrayList<Double> in = llegir(Estadistica_input);
-        return in;
-    }
 
-    public ArrayList<Double> llegir(DataInputStream d) throws IOException {
-        ArrayList<Double> in = new ArrayList<>();
-        double n = d.readDouble();
-        in.add(n);
-        System.out.println("n: " + n);
-        for(int i = 1; i < n; ++i ){
-            in.add(d.readDouble());
-        }
-
-        return in;
-    }
-
-    public void EscriureDadesEstadistica(ArrayList<Double> o) throws IOException {
-        int tam = o.size();
-        for(int i = 0; i <= tam ; ++i){
-            Estadistica_output.writeDouble(o.get(i));
-        }
-    }
 
 }

@@ -11,9 +11,7 @@ public class CtrlDomini {
     private String Path_sortida;
     
     private CtrlFitxer ControladorFitxer;
-    private Estadistiques Estadistiques;
     private CtrlPresentacio ControladorPresentacio;
-
 
     private InputStream Input;
 
@@ -22,7 +20,6 @@ public class CtrlDomini {
     public CtrlDomini(CtrlPresentacio Cp, int funcio, String path_entrada, int algoritme) throws IOException {
         this.ControladorPresentacio = Cp;
         inicializarCtrlDomini(path_entrada,algoritme,funcio);
-       // carregarFitxersEstadistica();//carrego, llegeixo, poso a arrayList
         ByteArrayOutputStream output;
         System.out.println(Algoritme);
         if(Algoritme == 4){
@@ -44,13 +41,6 @@ public class CtrlDomini {
         }
 
     }
-
-
-    private void carregarFitxersEstadistica() throws IOException {
-        ArrayList<Double> in = ControladorFitxer.carregarFitxersEstadistica(Algoritme);
-        Estadistiques = new Estadistiques(in);
-    }
-
 
 
     public void inicializarCtrlDomini(String path_entrada, int algoritme, int funcio) throws IOException {
@@ -143,15 +133,8 @@ public class CtrlDomini {
         double midaO = arxiu.getMidaO();
         double midaC = arxiu.getMidaC();
         double temps = arxiu.getTemps();
-
-        System.out.println(" midaO: " + midaO + " midaC: " + midaC + "temps: " + temps);
-        System.out.println("comprimit");
-        //ArrayList<Double> o = Estadistiques.editar_estadistica(midaO,midaC,temps, algoritme);
-        //ControladorFitxer.EscriureDadesEstadistica(o);
         ControladorPresentacio.getEstadistiques(midaO,midaC,temps);
-
         return out;
-
 
     }
 

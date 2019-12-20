@@ -6,14 +6,22 @@ public class Estadistiques {
     ArrayList<Double> input;
     double num_compresions;
 
-    double mitjanaRati_lz78 = 0;
-    double mitjanaVel_lz78 = 0;
-    double mitjanaRati_lzw = 0;
-    double mitjanaVel_lzw = 0;
-    double mitjanaRati_lzss = 0;
-    double mitjanaVel_lzss = 0;
-    double mitjanaRati_jpeg = 0;
-    double mitjanaVel_jpeg = 0;
+    double nLZW;
+    double nLZSS;
+    double nLZ78;
+    double nJPEG;
+
+    double mLZW;
+    double mLZSS;
+    double mLZ78;
+    double mJPEG;
+
+    double vLZW;
+    double vLZSS;
+    double vLZ78;
+    double vJPEG;
+
+
 
     public Estadistiques(ArrayList<Double> in) throws IOException {
         this.input = in;
@@ -35,59 +43,66 @@ public class Estadistiques {
         return this.input;
 
     }
-   /* public ArrayList<Double> mostrar_estadistiques(){
 
+    public ArrayList<Double> mostrarEstadistiques(ArrayList<Double> in) {
+
+        double algoritme;
+        double midaO;
+        double midaC;
+        double temps;
+        double radiC;
+
+        Double num_comp = in.get(0);
+        int tam = (int) ((num_comp*3)+1);
+        for(int i = 1; i< tam ;i +=4){
+            System.out.println("tam: " + tam + "num_C: " + num_comp);
+            algoritme = in.get(i);
+            midaO = in.get(i+1);
+            midaC = in.get(i+2);
+            temps = in.get(i+3);
+            radiC = midaC/midaO;
+            if(algoritme == 0) {
+                mLZ78 += radiC;
+                vLZ78 = midaO/temps;
+                nLZ78++;
+            }
+            if(algoritme == 1) {
+                mLZW += radiC;
+                vLZW = midaO/temps;
+                nLZW++;
+            }
+            if(algoritme == 0) {
+                mLZSS += radiC;
+                vLZSS = midaO/temps;
+                nLZSS++;
+            }
+            if(algoritme == 0) {
+                mJPEG += radiC;
+                vJPEG = midaO/temps;
+                nJPEG++;
+            }
+
+        }
+        vLZ78 = vLZ78/nLZ78;
+        vJPEG = vJPEG/nJPEG;
+        vLZSS = vLZSS/nLZSS;
+        vLZW = vLZW/nLZW;
+
+        mLZ78 = mLZ78/nLZ78;
+        mJPEG = mJPEG/nJPEG;
+        mLZSS = mLZSS/nLZSS;
+        mLZW = mLZW/nLZW;
+
+        ArrayList<Double> o = null;
+        o.add(mLZ78);
+        o.add(vLZ78);
+        o.add(mLZW);
+        o.add(vLZW);
+        o.add(mLZSS);
+        o.add(vLZSS);
+        o.add(mJPEG);
+        o.add(vJPEG);
+        return o;
     }
 
-    public void calcular_mitjanes_LZ78(ArrayList<Double> in) throws IOException {
-        double srC = 0;
-        double sv = 0;
-        double n = in.get(0);
-
-        for (int i = 0; i < n; i+=2) {
-            srC += in.get(i);
-            sv += in.get(i+1);
-        }
-        mitjanaRati_lz78 = srC/(n/2); //la meitat dels elements son ratis i l'altra velocitats
-        mitjanaVel_lz78 = sv/(n/2);
-    }
-
-    public void calcular_mitjanes_LZW(ArrayList<Double> in) throws IOException {
-        double srC = 0;
-        double sv = 0;
-        double n = in.get(0);
-
-        for (int i = 0; i < n; i+=2) {
-            srC += in.get(i);
-            sv += in.get(i+1);
-        }
-        mitjanaRati_lzw = srC/(n/2); //la meitat dels elements son ratis i l'altra velocitats
-        mitjanaVel_lzw = sv/(n/2);
-    }
-
-    public void calcular_mitjanes_LZSS(ArrayList<Double> in) throws IOException {
-        double srC = 0;
-        double sv = 0;
-        double n = in.get(0);
-
-        for (int i = 0; i < n; i+=2) {
-            srC += in.get(i);
-            sv += in.get(i+1);
-        }
-        mitjanaRati_lzss = srC/(n/2); //la meitat dels elements son ratis i l'altra velocitats
-        mitjanaVel_lzss = sv/(n/2);
-    }
-
-    public void calcular_mitjanes_JPEG( ArrayList<Double> in) throws IOException {
-        double srC = 0;
-        double sv = 0;
-        double n = in.get(0);
-
-        for (int i = 0; i < n; i+=2) {
-            srC += in.get(i);
-            sv += in.get(i+1);
-        }
-        mitjanaRati_jpeg = srC/(n/2); //la meitat dels elements son ratis i l'altra velocitats
-        mitjanaVel_jpeg = sv/(n/2);
-    }*/
 }
