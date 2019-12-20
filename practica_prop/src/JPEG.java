@@ -36,11 +36,11 @@ class JPEG extends Algoritme{
     private int[] quantIDs = {0, 1, 1};
 
     //Codificacion entropica
-    private  Map<Integer, Map<String, Integer>> huf_tables = new HashMap<>();
-    private Map<Integer, Map<Integer, String>> huf_tables_inv = new HashMap<>();
+    private  Map<Integer, Map<String, Integer>> huf_tables = new HashMap<Integer, Map<String, Integer>>();
+    private Map<Integer, Map<Integer, String>> huf_tables_inv = new HashMap<Integer, Map<Integer, String>>();
 
     //Cuantizacion
-    private Map<Integer, Integer[][]> quant_tables = new HashMap<>();
+    private Map<Integer, Integer[][]> quant_tables = new HashMap<Integer, Integer[][]>();
 
     //Matriz zigzag
     private int[][] zigzag = new int[63][2];
@@ -222,8 +222,8 @@ class JPEG extends Algoritme{
     private void huffman(Integer[] counts, Integer[] values, int id) {
         short pointer = 0;
         int count = 0;
-        Map<String, Integer> table = new TreeMap<>();
-        Map<Integer, String> inv_table = new TreeMap<>();
+        Map<String, Integer> table = new TreeMap<String, Integer>();
+        Map<Integer, String> inv_table = new TreeMap<Integer, String>();
         huf_branch(counts, values, "", pointer, count, table, inv_table);
         huf_tables.put(id, table);
         huf_tables_inv.put(id,inv_table);
