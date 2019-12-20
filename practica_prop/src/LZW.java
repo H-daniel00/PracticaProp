@@ -22,7 +22,7 @@ public class LZW extends Algoritme{
         this.out = new DataOutputStream(output);
     } //contructora descomprimir
 
-    public void llegir_input() throws UnsupportedEncodingException, IOException{
+    private void llegir_input() throws UnsupportedEncodingException, IOException{
        String cadena;
          BufferedReader i = new BufferedReader(new InputStreamReader(input, "utf-8"));
          while ((cadena = i.readLine()) != null) {
