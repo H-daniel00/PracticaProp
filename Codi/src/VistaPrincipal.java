@@ -20,8 +20,6 @@ public class VistaPrincipal extends JFrame {
     private double midaO;
     private double midaC;
 
-    private double v;
-
     private static CtrlPresentacio ControladorPresentacio;
 
     public VistaPrincipal(){
