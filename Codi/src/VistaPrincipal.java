@@ -23,6 +23,8 @@ public class VistaPrincipal extends JFrame {
     private double midaC;
     private double temps;
 
+    String v;
+
 
 
 
@@ -72,8 +74,8 @@ public class VistaPrincipal extends JFrame {
         this.midaO = midaO;
         this.midaC = midaC;
         ratiCompressio = midaC / midaO;
-
         velocitat = ((midaO / temps)*Math.pow(10,9))/Math.pow(10,3);
+
 
     }
 }
