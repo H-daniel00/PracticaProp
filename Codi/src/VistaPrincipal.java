@@ -1,9 +1,12 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.text.DecimalFormat;
+
 
 public class VistaPrincipal extends JFrame {
 
+    DecimalFormat formateador = new DecimalFormat("####.##");
 
     private JPanel panel;
     private JTextField Fitxer;
@@ -25,7 +28,7 @@ public class VistaPrincipal extends JFrame {
 
     private static CtrlPresentacio ControladorPresentacio;
 
-    public VistaPrincipal(){
+    public VistaPrincipal() {
         Algoritme.setSelectedIndex(5);
         VistaPrincipal v = this;
 
@@ -69,6 +72,8 @@ public class VistaPrincipal extends JFrame {
         this.midaO = midaO;
         this.midaC = midaC;
         ratiCompressio = midaC / midaO;
+
         velocitat = ((midaO / temps)*Math.pow(10,9))/Math.pow(10,3);
+
     }
 }
