@@ -51,7 +51,7 @@ class JPEG extends Algoritme{
     //Offset del componente DC
     private int[] offset = {0,0,0};
 
-    public JPEG(InputStream input) {
+    public JPEG(InputStream input) throws IOException{
         super(input);
         midaO = input.available();
         generate_zigzag();
@@ -65,7 +65,7 @@ class JPEG extends Algoritme{
         read_ppm_header();
         read_ppm();
         write_jpeg();
-        temps = time_fin - time_ini;
+        temps = System.nanoTime() - time_ini;
         return output;
     }
 
@@ -74,7 +74,7 @@ class JPEG extends Algoritme{
         read_jpeg(false);
         read_scan();
         write_ppm();
-        temps = time_fin - time_ini;
+        temps = System.nanoTime() - time_ini;
         return output;
     }
 
