@@ -11,7 +11,7 @@ public class VistaPrincipal extends JFrame {
     private JComboBox Funcio;
     private JComboBox Algoritme;
     private JTextArea Est;
-    private JScrollPane ESTADISTICAMOBIL;
+
 
 
     private double ratiCompressio;
@@ -47,8 +47,9 @@ public class VistaPrincipal extends JFrame {
 
 
                 }
-
+                JOptionPane.showMessageDialog(null, "Arxiu comprimit correctament");
             }
+
         });
 
 
