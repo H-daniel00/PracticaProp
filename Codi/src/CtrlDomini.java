@@ -17,11 +17,10 @@ public class CtrlDomini {
 
     
     
-    public CtrlDomini(CtrlPresentacio Cp, int funcio, String path_entrada, int algoritme) throws IOException {
+    CtrlDomini(CtrlPresentacio Cp, int funcio, String path_entrada, int algoritme) throws IOException {
         this.ControladorPresentacio = Cp;
         inicializarCtrlDomini(path_entrada,algoritme,funcio);
         ByteArrayOutputStream output;
-        System.out.println(Algoritme);
         if(Algoritme == 4){
             if(funcio == 0){
                 output = comprimir(Path_entrada);
@@ -43,17 +42,16 @@ public class CtrlDomini {
     }
 
 
-    public void inicializarCtrlDomini(String path_entrada, int algoritme, int funcio) throws IOException {
+    private void inicializarCtrlDomini(String path_entrada, int algoritme, int funcio) throws IOException {
 
         ControladorFitxer = new CtrlFitxer(this);
         setFuncio(funcio);
         setPath_entrada(path_entrada);
         setAlgoritme(algoritme);
         setPath_sortida();
-        
     }
 
-    public int algoritme_automatic(String path, int funcio){
+    int algoritme_automatic(String path, int funcio){
         if(funcio == 0){
             if(path.endsWith(".txt")) return 1;
             else if(path.endsWith(".ppm")) return 3;
@@ -70,11 +68,11 @@ public class CtrlDomini {
     }
 
 
-    public void setFuncio(int Funcio) {
+    private void setFuncio(int Funcio) {
         this.Funcio = Funcio;
     }
 
-    public void setPath_entrada(String path_entrada) {
+    private void setPath_entrada(String path_entrada) {
         this.Path_entrada = path_entrada;
     }
 
@@ -84,7 +82,7 @@ public class CtrlDomini {
         if(Algoritme == 5) throw new IOException("No existeix algorisme per aquesta entrada.");
     }
 
-    public void setPath_sortida(){
+    private void setPath_sortida(){
 
         if(Path_entrada.endsWith(".txt")){
             if(Algoritme == 5 || Algoritme == 1) this.Path_sortida = "sortida.lzw";
@@ -99,11 +97,11 @@ public class CtrlDomini {
 
     }
     
-    public void carregarFitxerEntrada() throws IOException{
+    private void carregarFitxerEntrada() throws IOException{
         this.Input  = ControladorFitxer.carregarFitxerEntrada(Path_entrada);
     }
 
-    public void escriureFitxerSortida(ByteArrayOutputStream stream) throws IOException{
+    private void escriureFitxerSortida(ByteArrayOutputStream stream) throws IOException{
         ControladorFitxer.escriureFitxerSortida(stream,Path_sortida);
     }
     
