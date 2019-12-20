@@ -54,6 +54,7 @@ public class LZW extends Algoritme{
                 s = sc;
             }
             else{
+                if(!diccionari.containsKey(s))diccionari.put(s, (short) mida_diccionari++);
                 out.writeShort(diccionari.get(s));
                  if(mida_diccionari < MAX_SIZE)diccionari.put(sc, (short) mida_diccionari++);
                 s = ""+c;
