@@ -53,23 +53,28 @@ class JPEG extends Algoritme{
 
     public JPEG(InputStream input) {
         super(input);
+        midaO = input.available();
         generate_zigzag();
     }
 
     //Metodos públicos
 
     public ByteArrayOutputStream comprimir() throws IOException {
+        long time_ini = System.nanoTime();
         read_jpeg(true);
         read_ppm_header();
         read_ppm();
         write_jpeg();
+        temps = time_fin - time_ini;
         return output;
     }
 
     public ByteArrayOutputStream descomprimir() throws IOException {
+        long time_ini = System.nanoTime();
         read_jpeg(false);
         read_scan();
         write_ppm();
+        temps = time_fin - time_ini;
         return output;
     }
 
