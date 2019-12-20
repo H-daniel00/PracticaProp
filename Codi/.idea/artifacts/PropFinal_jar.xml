@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="PropFinal:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PropFinal_jar</output-path>
+    <root id="archive" name="PropFinal.jar">
+      <element id="module-output" name="PropFinal" />
+      <element id="library" level="module" name="JUnit4" module-name="PropFinal" />
+    </root>
+  </artifact>
+</component>

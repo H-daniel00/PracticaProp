@@ -1,10 +1,11 @@
+package prop;
+
 import java.io.*;
-import java.util.*;
 
 public class CtrlFitxer {
 
     private CtrlDomini domini;
-    private CtrlCarpeta ControladorCarpeta;
+    CtrlCarpeta ControladorCarpeta;
 
     public CtrlFitxer(CtrlDomini ctrlDomini) {
         this.domini = ctrlDomini;

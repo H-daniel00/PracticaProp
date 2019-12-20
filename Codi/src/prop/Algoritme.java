@@ -1,3 +1,5 @@
+package prop;
+
 import java.io.*;
 
 public abstract class Algoritme {
