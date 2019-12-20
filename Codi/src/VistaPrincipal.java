@@ -1,10 +1,13 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.text.DecimalFormat;
+
 
 public class VistaPrincipal extends JFrame {
 
 
+    DecimalFormat formateador = new DecimalFormat("000.00");
     private JPanel panel;
     private JTextField Fitxer;
     private JButton Acceptar;
@@ -19,6 +22,9 @@ public class VistaPrincipal extends JFrame {
     private double midaO;
     private double midaC;
     private double temps;
+
+    String v;
+    String r;
 
 
 
@@ -41,7 +47,7 @@ public class VistaPrincipal extends JFrame {
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
-                    String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "\n" + "- Velocitat: " + velocitat + " kBytes/s \n\n";
+                    String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "\n" + "- Velocitat: " + v + " kBytes/s \n\n";
                     System.out.println("aux" + aux);
                     Est.append(aux);
 
@@ -68,6 +74,8 @@ public class VistaPrincipal extends JFrame {
         this.midaO = midaO;
         this.midaC = midaC;
         ratiCompressio = midaC / midaO;
+        r = formateador.format(ratiCompressio);
         velocitat = ((midaO / temps)*Math.pow(10,9))/Math.pow(10,3);
+        v = formateador.format(velocitat);
     }
 }
