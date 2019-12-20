@@ -1,2 +1,0 @@
-# PracticaProp
-Compresor de archivos
