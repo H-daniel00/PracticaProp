@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 
 public class CtrlDomini {
@@ -43,7 +42,6 @@ public class CtrlDomini {
 
 
     private void inicializarCtrlDomini(String path_entrada, int algoritme, int funcio) throws IOException {
-
         ControladorFitxer = new CtrlFitxer(this);
         setFuncio(funcio);
         setPath_entrada(path_entrada);
@@ -83,7 +81,6 @@ public class CtrlDomini {
     }
 
     private void setPath_sortida(){
-
         if(Path_entrada.endsWith(".txt")){
             if(Algoritme == 5 || Algoritme == 1) this.Path_sortida = "sortida.lzw";
             else if(Algoritme == 0)this.Path_sortida = "sortida.lz78";
@@ -126,7 +123,7 @@ public class CtrlDomini {
                 throw new IllegalStateException("Unexpected value: " + algoritme);
         }
 
-        out =arxiu.comprimir();
+        out = arxiu.comprimir();
 
         double midaO = arxiu.getMidaO();
         double midaC = arxiu.getMidaC();

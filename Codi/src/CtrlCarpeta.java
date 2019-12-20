@@ -1,9 +1,6 @@
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
-import java.util.Scanner;
 
 public class CtrlCarpeta{
 
@@ -32,9 +29,7 @@ public class CtrlCarpeta{
                 }
                 if (temp != 0) path += (char) temp;
             }
-            System.out.println(path);
             int type = input.read();
-            System.out.println(type);
             if(type == 4){
                 File folder = new File(path_out+"/"+path);
                 folder.mkdir();
@@ -45,7 +40,6 @@ public class CtrlCarpeta{
                     size[b] = (byte)input.read();
                     fileSize |= ((size[b]&0xFF) << (8 * b)) ;
                 }
-                System.out.println(fileSize);
                 ByteArrayOutputStream tempOut = new ByteArrayOutputStream();
                 for (int i = 0; i < fileSize; i++) {
                     tempOut.write(input.read());
@@ -77,8 +71,6 @@ public class CtrlCarpeta{
     void listFilesForFolder(String rel, String abs,final File folder,OutputStream output) throws IOException {
         String relPath;
         String absPath;
-        System.out.println(rel);
-        System.out.println(abs);
 
         for (final File fileEntry : folder.listFiles()) {
             byte type = 0;
@@ -91,11 +83,9 @@ public class CtrlCarpeta{
                 writeHeader(relPath,type,output);
                 listFilesForFolder(relPath, absPath,fileEntry,output);
 
-                System.out.println(relPath);
             } else {
                 type =(byte) ctrlFitxer.algoritmeAutomatic(fileEntry.getName(),0);
 
-                System.out.println(relPath);
                 FileInputStream input = ctrlFitxer.carregarFitxerEntrada(absPath);
                 ByteArrayOutputStream out;
                 if(type == 5){
@@ -124,7 +114,6 @@ public class CtrlCarpeta{
         writeHeader(relPath,type,output);
         byte[] size = new byte[4];
         int fileSize = compressedFile.length;
-        System.out.println(fileSize);
         for(int b = 0; b < 4; b++){
             size[b] = (byte)((fileSize >> (8*b)) & 0xFF);
         }

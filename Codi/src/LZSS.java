@@ -1,11 +1,6 @@
 import java.io.*;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 import java.util.Stack;
-import java.io.FileOutputStream;
 
 public class LZSS extends Algoritme {
 
@@ -151,7 +146,6 @@ public class LZSS extends Algoritme {
         if (cantidad != 1) out.writeByte(temporal);
         long time_fin = System.nanoTime();
         temps = time_fin - time_ini;
-        midaC = out.size();
         return output;
     }
 

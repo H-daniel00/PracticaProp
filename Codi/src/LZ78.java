@@ -69,7 +69,6 @@ public class LZ78 extends Algoritme{
 
         long time_fin = System.nanoTime();
         temps = time_fin - time_ini;
-        midaC = out.size();
         return output;
     }
 

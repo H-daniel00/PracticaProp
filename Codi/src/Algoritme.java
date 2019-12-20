@@ -6,7 +6,6 @@ public abstract class Algoritme {
     public ByteArrayOutputStream output;
 
     protected double midaO;
-    protected double midaC;
     protected double temps;
 
     public Algoritme(InputStream input){
