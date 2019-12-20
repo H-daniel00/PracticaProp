@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author mireiabosquemari
  */
-abstract class Algoritme {
+public abstract class Algoritme {
 
     InputStream input;
     ByteArrayOutputStream output;
