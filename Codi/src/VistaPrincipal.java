@@ -44,10 +44,10 @@ public class VistaPrincipal extends JFrame {
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
-                    velocitat =  new BigDecimal(velocitat)
-                            .setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+                    velocitat =  new BigDecimal(velocitat).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
                     String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "%\n" + "- Velocitat: " + velocitat + " kBytes/s \n\n";
                     System.out.println("aux" + aux);
+                    Est.setText("");
                     Est.append(aux);
 
 
