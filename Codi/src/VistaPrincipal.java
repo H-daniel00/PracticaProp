@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 
@@ -14,20 +16,15 @@ public class VistaPrincipal extends JFrame {
     private JComboBox Funcio;
     private JComboBox Algoritme;
     private JTextArea Est;
-    private JScrollPane ESTADISTICAMOBIL;
+
 
 
     private double ratiCompressio;
     private double velocitat;
     private double midaO;
     private double midaC;
-    private double temps;
 
-    String v;
-    String r;
-
-
-
+    private double v;
 
     private static CtrlPresentacio ControladorPresentacio;
 
@@ -47,7 +44,9 @@ public class VistaPrincipal extends JFrame {
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
-                    String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "\n" + "- Velocitat: " + v + " kBytes/s \n\n";
+                    velocitat =  new BigDecimal(velocitat)
+                            .setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+                    String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "%\n" + "- Velocitat: " + velocitat + " kBytes/s \n\n";
                     System.out.println("aux" + aux);
                     Est.append(aux);
 
@@ -74,8 +73,7 @@ public class VistaPrincipal extends JFrame {
         this.midaO = midaO;
         this.midaC = midaC;
         ratiCompressio = midaC / midaO;
-        r = formateador.format(ratiCompressio);
+        ratiCompressio = (int)(ratiCompressio*100);
         velocitat = ((midaO / temps)*Math.pow(10,9))/Math.pow(10,3);
-        v = formateador.format(velocitat);
     }
 }
