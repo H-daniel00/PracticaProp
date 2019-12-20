@@ -2,8 +2,8 @@ import java.io.*;
 
 public abstract class Algoritme {
 
-    InputStream input;
-    ByteArrayOutputStream output;
+    public InputStream input;
+    public ByteArrayOutputStream output;
 
     protected double midaO;
     protected double temps;
