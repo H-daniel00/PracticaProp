@@ -1,0 +1,154 @@
+-----
+
+Prova 1 (c)
+Descripció: Compressió correcta d'un arxiu .txt
+Objectius: Comprimir un arxiu .txt on tots els caràcter són diferents
+Drivers: Driver_LZSS.jar
+Entrada: 
+--c
+prova1.txt
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Arxiu comprimit a: sortida.lzss
+
+Resultat de la prova: ok
+
+Prova 1 (d)
+Descripció: Descompressió correcta d'un arxiu .lzss
+Objectius: Descomprimir un arxiu .lzss on tots els caràcter són diferents
+Drivers: Driver_LZSS.jar
+Entrada: 
+--d
+prova1.lzss
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Amb quin fitxer vol comparar la sortida?
+Arxiu descomprimit a: sortida.txt
+
+Resultat de la prova: ok
+
+-----
+
+Prova 2 (c)
+Descripció: Compressió correcta d'un arxiu .txt
+Objectius: Comprimir un arxiu .txt on hi ha 3 lletres, 2 iguals, i 3 iguals a les primeres
+Drivers: Driver_LZSS.jar
+Entrada: 
+--c
+prova2.txt
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Arxiu comprimit a: sortida.lzss
+
+Resultat de la prova: ok
+
+Prova 2 (d)
+Descripció: Descompressió correcta d'un arxiu .lzss
+Objectius: Descomprimir un arxiu .lzss on hi ha 3 lletres, 2 iguals, i 3 iguals a les primeres
+Drivers: Driver_LZSS.jar
+Entrada: 
+--d
+prova2.lzss
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Amb quin fitxer vol comparar la sortida?
+Arxiu descomprimit a: sortida.txt
+
+Resultat de la prova: ok
+----
+
+Prova 3 (c)
+Descripció: Compressió correcta d'un arxiu .txt
+Objectius: Comprimir un arxiu .txt on hi ha 36 caràcters iguals per comprovar que agafa el primer caracter i després 34 iguals amb flag 1 i per últim 1 més sola
+Drivers: Driver_LZSS.jar
+Entrada: 
+--c
+prova3.txt
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Arxiu comprimit a: sortida.lzss
+
+Resultat de la prova: ok
+
+Prova 3 (d)
+Descripció: Descompressió correcta d'un arxiu .lzss
+Objectius: Descomprimir un arxiu .lzss on hi ha 36 caràcters iguals per comprovar que agafa el primer caracter i després 34 iguals amb flag 1 i per últim 1 més sola
+Drivers: Driver_LZSS.jar
+Entrada: 
+--d
+prova3.lzss
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Amb quin fitxer vol comparar la sortida?
+Arxiu descomprimit a: sortida.txt
+
+Resultat de la prova: ok
+
+----
+
+Prova 4 (c)
+Descripció: Compressió correcta d'un arxiu .txt
+Objectius: Comprimir un arxiu .txt on hi ha 4 lletres, 3 lletres iguals a les primeres i 4 lletres iguals a les primeres per
+comprovar que aquestes últimes agafen el desplaçamente de les primeres 4 i no de les 3 següents
+Drivers: Driver_LZSS.jar
+Entrada: 
+--c
+prova4.txt
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Arxiu comprimit a: sortida.lzss
+
+Resultat de la prova: ok
+
+Prova 4 (d)
+Descripció: Descompressió correcta d'un arxiu .lzss
+Objectius: Descomprimir un arxiu .lzss on hi ha 4 lletres, 3 lletres iguals a les primeres i 4 lletres iguals a les primeres per
+comprovar que aquestes últimes agafen el desplaçamente de les primeres 4 i no de les 3 següents
+Drivers: Driver_LZSS.jar
+Entrada: 
+--d
+prova4.lzss
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Amb quin fitxer vol comparar la sortida?
+Arxiu descomprimit a: sortida.txt
+
+Resultat de la prova: ok
+
+----
+
+Prova 5
+Descripció: Descompressió correcta d'un arxiu .lzss
+Objectius: Descomprimir un arxiu .lzss gran amb caràcters especials: accents, dieresis, ñ...
+Drivers: Driver_LZSS.jar
+Entrada: 
+--d
+prova4.lzss
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Arxiu comprimit a: sortida.txt
+
+Resultat de la prova: ok menys els caracters especials
+
+----
+
+Prova 6
+Descripció: Descompressió correcta d'un arxiu .lzss
+Objectius: Descomprimir un arxiu .lzss gran amb caràcters especials: accents, dieresis, ñ...
+Drivers: Driver_LZSS.jar
+Entrada: 
+--d
+prova4.lzss
+Sortida: 
+Vol comprimir o descomprimir? (c/d)
+Introdueixi el fitxer que vol comprimir/descomprimir
+Arxiu comprimit a: sortida.txt
