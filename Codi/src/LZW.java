@@ -6,10 +6,10 @@ import java.util.*;
 
 public class LZW extends Algoritme{
    
-    DataInputStream in;
-    DataOutputStream out;
-    InputStream input;
-    String text_in = "";
+    private DataInputStream in;
+    private DataOutputStream out;
+    private InputStream input;
+    private String text_in = "";
 
     private int mida_diccionari;
     private int MAX_SIZE = 32767;
