@@ -1,5 +1,3 @@
-
-
 import java.io.*;
 import java.util.*;
 
@@ -20,7 +18,7 @@ public class LZW extends Algoritme{
         if(funcio == 0) this.input = input;
         else this.in =  new DataInputStream( new BufferedInputStream(input));
         this.out = new DataOutputStream(output);
-    } //contructora descomprimir
+    }
 
     private void llegir_input() throws UnsupportedEncodingException, IOException{
        String cadena;
@@ -66,8 +64,6 @@ public class LZW extends Algoritme{
         }
         long time_fin = System.nanoTime();
         temps = time_fin - time_ini;
-        //midaC = out.size();
-
         return output;
 
 
@@ -106,14 +102,12 @@ public class LZW extends Algoritme{
             if(diccionari.containsKey(codNuevo)) cadena = diccionari.get(codNuevo);
             else if( codNuevo == mida_diccionari) cadena = codViejo + codViejo.charAt(0);
             textOut.append(cadena);
-           if(mida_diccionari < MAX_SIZE) diccionari.put(mida_diccionari++, codViejo + cadena.charAt(0));
+            if(mida_diccionari < MAX_SIZE) diccionari.put(mida_diccionari++, codViejo + cadena.charAt(0));
             codViejo = cadena;
         }
 
-        System.out.println("textout:" + textOut);
         byte[] o = textOut.toString().getBytes();
         out.write(o);
-        System.out.println("mida diccionari:" + mida_diccionari);
         return output;
     }
 

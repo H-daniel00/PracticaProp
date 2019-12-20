@@ -38,15 +38,12 @@ public class VistaPrincipal extends JFrame {
                 if(Fitxer.getText().isEmpty())  JOptionPane.showMessageDialog(null, "Siusplau, ompli tots els camps");
                 else {
                     try {
-                        System.out.println("abans crear");
                         ControladorPresentacio = new CtrlPresentacio(v,Funcio.getSelectedIndex(),Fitxer.getText(),Algoritme.getSelectedIndex());
-                        System.out.println("despres crear");
                     } catch (IOException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                     }
                     velocitat =  new BigDecimal(velocitat).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
                     String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "%\n" + "- Velocitat: " + velocitat + " kBytes/s \n\n";
-                    System.out.println("aux" + aux);
                     Est.setText("");
                     Est.append(aux);
 
