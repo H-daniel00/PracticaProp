@@ -4,7 +4,7 @@ import java.nio.file.Paths;
 
 public class CtrlCarpeta{
 
-    CtrlFitxer ctrlFitxer;
+    private CtrlFitxer ctrlFitxer;
 
     public CtrlCarpeta(CtrlFitxer ctrlFitxer) {
         this.ctrlFitxer = ctrlFitxer;
@@ -68,7 +68,7 @@ public class CtrlCarpeta{
         return output;
     }
 
-    void listFilesForFolder(String rel, String abs,final File folder,OutputStream output) throws IOException {
+    private void listFilesForFolder(String rel, String abs, final File folder, OutputStream output) throws IOException {
         String relPath;
         String absPath;
 
@@ -98,7 +98,7 @@ public class CtrlCarpeta{
             }
         }
     }
-    void writeHeader(String relPath, byte type,OutputStream output) throws IOException {
+    private void writeHeader(String relPath, byte type, OutputStream output) throws IOException {
         int chars = 100;
         for(char byt: relPath.toCharArray()) {
             output.write(byt);
@@ -110,7 +110,7 @@ public class CtrlCarpeta{
         }
         output.write(type);
     }
-    void writeFile(String relPath, byte type, byte[] compressedFile,OutputStream output) throws  IOException{
+    private void writeFile(String relPath, byte type, byte[] compressedFile, OutputStream output) throws  IOException{
         writeHeader(relPath,type,output);
         byte[] size = new byte[4];
         int fileSize = compressedFile.length;
@@ -123,7 +123,7 @@ public class CtrlCarpeta{
         }
     }
 
-    ByteArrayOutputStream justCopy(InputStream in) throws IOException{
+    private ByteArrayOutputStream justCopy(InputStream in) throws IOException{
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         int temp;
         while((temp = in.read()) != -1){

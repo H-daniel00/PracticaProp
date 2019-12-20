@@ -3,12 +3,8 @@ import java.util.*;
 
 public class CtrlFitxer {
 
-    CtrlDomini domini;
-    CtrlCarpeta ControladorCarpeta;
-
-    DataInputStream Estadistica_input;
-    DataOutputStream Estadistica_output;
-
+    private CtrlDomini domini;
+    private CtrlCarpeta ControladorCarpeta;
 
     public CtrlFitxer(CtrlDomini ctrlDomini) {
         this.domini = ctrlDomini;

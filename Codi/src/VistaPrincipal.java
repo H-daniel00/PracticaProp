@@ -8,16 +8,12 @@ import java.text.DecimalFormat;
 
 public class VistaPrincipal extends JFrame {
 
-
-    DecimalFormat formateador = new DecimalFormat("000.00");
     private JPanel panel;
     private JTextField Fitxer;
     private JButton Acceptar;
     private JComboBox Funcio;
     private JComboBox Algoritme;
     private JTextArea Est;
-
-
 
     private double ratiCompressio;
     private double velocitat;
@@ -46,15 +42,9 @@ public class VistaPrincipal extends JFrame {
                     String aux = "- Mida original: " + midaO + " Bytes\n" + "- Mida comprimit: " + midaC + " Bytes\n" + "- Rati compressió: " + ratiCompressio + "%\n" + "- Velocitat: " + velocitat + " kBytes/s \n\n";
                     Est.setText("");
                     Est.append(aux);
-
-
                 }
-
             }
         });
-
-
-
     }
 
     public static void main(String[] args) {
