@@ -7,10 +7,7 @@
 
 import java.io.*;
 import java.util.*;
-/**
- *
- * @author mireiabosquemari
- */
+
 public abstract class Algoritme {
 
     InputStream input;
