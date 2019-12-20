@@ -9,10 +9,10 @@ import java.io.FileOutputStream;
 
 public class LZSS extends Algoritme {
 
-    DataInputStream in;
-    DataOutputStream out;
-    InputStream input;
-    String text_in = "";
+    private DataInputStream in;
+    private DataOutputStream out;
+    private InputStream input;
+    private String text_in = "";
 
     private int cantidad = 1;
     private int nums = 0;
