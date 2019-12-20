@@ -13,36 +13,6 @@ public class CtrlCarpeta{
         this.ctrlFitxer = ctrlFitxer;
     }
 
-    public static void main(String[] args){
-        try {
-            CtrlCarpeta folderDriver = new CtrlCarpeta(new CtrlFitxer(new CtrlDomini( new CtrlPresentacio(new VistaPrincipal(),0,"h",0),0,"hola",1)));
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Path:");
-            String path = sc.nextLine();
-            String op;
-            System.out.println("Comprimir / Descomprimir? (c/d)");
-            do {
-                op = sc.nextLine();
-            } while (!op.equals("d") && !op.equals("c"));
-            if (op.equals("d")) {
-                FileInputStream input = new FileInputStream(path);
-                System.out.println("Path Out:");
-                String pathOut = sc.nextLine();
-                folderDriver.decompress(input, pathOut);
-            } else { //Comprimir
-                System.out.println("Path Out:");
-                String pathOut;
-                do {
-                    pathOut = sc.nextLine();
-                }while(!pathOut.endsWith(".tar"));
-                FileOutputStream output = new FileOutputStream(pathOut);
-                folderDriver.compress(path);
-            }
-        }catch(Exception e){
-            System.out.println("Error");
-        }
-    }
-
     void decompress(InputStream input,String path_out) throws IOException{
         int temp;
         Path target = Paths.get(path_out).toAbsolutePath();

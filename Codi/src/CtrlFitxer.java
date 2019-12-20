@@ -6,10 +6,7 @@
 
 import java.io.*;
 import java.util.*;
-/**
- *
- * @author mireiabosquemari
- */
+
 public class CtrlFitxer {
 
     CtrlDomini domini;
