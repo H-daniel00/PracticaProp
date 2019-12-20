@@ -26,7 +26,7 @@ public class LZSS extends Algoritme {
         this.out = new DataOutputStream(output);
     }
 
-    public void llegir_input() throws IOException {
+    private void llegir_input() throws IOException {
         String cadena;
         BufferedReader i = new BufferedReader(new InputStreamReader(this.input, "utf-8"));
         int aux = 0;
