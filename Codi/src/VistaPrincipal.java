@@ -1,12 +1,9 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.text.DecimalFormat;
-
 
 public class VistaPrincipal extends JFrame {
 
-    DecimalFormat formateador = new DecimalFormat("####.##");
 
     private JPanel panel;
     private JTextField Fitxer;
@@ -14,7 +11,7 @@ public class VistaPrincipal extends JFrame {
     private JComboBox Funcio;
     private JComboBox Algoritme;
     private JTextArea Est;
-
+    private JScrollPane ESTADISTICAMOBIL;
 
 
     private double ratiCompressio;
@@ -23,14 +20,12 @@ public class VistaPrincipal extends JFrame {
     private double midaC;
     private double temps;
 
-    String v;
-
 
 
 
     private static CtrlPresentacio ControladorPresentacio;
 
-    public VistaPrincipal() {
+    public VistaPrincipal(){
         Algoritme.setSelectedIndex(5);
         VistaPrincipal v = this;
 
@@ -52,9 +47,8 @@ public class VistaPrincipal extends JFrame {
 
 
                 }
-                JOptionPane.showMessageDialog(null, "Arxiu comprimit correctament");
-            }
 
+            }
         });
 
 
@@ -75,7 +69,5 @@ public class VistaPrincipal extends JFrame {
         this.midaC = midaC;
         ratiCompressio = midaC / midaO;
         velocitat = ((midaO / temps)*Math.pow(10,9))/Math.pow(10,3);
-
-
     }
 }
