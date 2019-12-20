@@ -11,14 +11,12 @@ public class VistaPrincipal extends JFrame {
     private JComboBox Funcio;
     private JComboBox Algoritme;
     private JTextArea Est;
-    private JScrollPane ESTADISTICAMOBIL;
 
 
     private double ratiCompressio;
     private double velocitat;
     private double midaO;
     private double midaC;
-    private double temps;
 
 
 
