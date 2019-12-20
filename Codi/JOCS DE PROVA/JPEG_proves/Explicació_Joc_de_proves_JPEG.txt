@@ -1,0 +1,71 @@
+-----
+
+Prova 1
+Descripció: Compressió correcta d'un arxiu PPM
+Objectius: Comprimir un arxiu ppm
+Entrada: 
+Comprimir
+D:\ENTREGA2\JOCS DE PROVA\JPEG_proves\JPEG_prova1.ppm
+JPEG
+Sortida: 
+Arxiu comprimit correctament
+
+Resultat de la prova: ok
+
+-----
+
+Prova 2
+Descripció: Descompressió correcta d'un arxiu JPEG
+Objectius: Descomprimir un fitxer JPEG
+Entrada: 
+Descomprimir
+D:\ENTREGA2\JOCS DE PROVA\JPEG_proves\JPEG_prova2.JPEG
+JPEG
+Sortida:
+Comprimir / Descomprimir? (c/d)
+Arxiu descomprimit correctament
+
+Resultat de la prova: ok
+
+----
+
+Prova 3
+Descripció: Intent de comprimir un arxiu PPM invàlid
+Objectius: Comprovar la validesa dels arxius PPM
+Entrada: 
+Comprimir
+D:\ENTREGA2\JOCS DE PROVA\JPEG_proves\JPEG_prova3.ppm
+JPEG
+Sortida:
+Header PPM incorrecte
+
+Resultat de la prova: ok
+
+----
+
+Prova 4
+Descripció: Intent de descomprimir un arxiu JPEG invàlid
+Objectius: Comprovar la validesa dels arxius JPEG
+Entrada: 
+Descomprimir
+D:\ENTREGA2\JOCS DE PROVA\JPEG_proves\JPEG_prova4.JPG
+JPEG
+Sortida:
+Header JPEG incorrecte
+Resultat de la prova: ok
+
+----
+
+Prova 5
+Descripció: Arxiu no existent
+Objectius: Comprovar la detecció d'arxius no existens
+Entrada: 
+Comprimir
+no_existeix.jpg
+JPEG
+Sortida:
+No existeix el fitxer
+Resultat de la prova: ok
+
+----
+
